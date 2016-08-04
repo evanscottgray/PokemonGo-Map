@@ -102,6 +102,9 @@ def get_args():
     parser.add_argument('-crd', '--create-db',
                         help='Create the database before starting the Webserver.',
                         action='store_true', default=False)
+    parser.add_argument('-ec', '--enable-clean',
+                        help='Enable cleaning of the db',
+                        action='store_true', default=False)
     parser.add_argument('-np', '--no-pokemon',
                         help='Disables Pokemon from the map (including parsing them into local db)',
                         action='store_true', default=False)

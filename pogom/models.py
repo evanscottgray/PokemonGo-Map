@@ -387,7 +387,8 @@ def parse_map(map_dict, step_location):
 
     bulk_upsert(ScannedLocation, scanned)
 
-    clean_database()
+    if args.enable_clean:
+        clean_database()
 
     return True
 
