@@ -82,7 +82,9 @@ if __name__ == '__main__':
             drop_tables(db)
         elif os.path.isfile(args.db):
             os.remove(args.db)
-    create_tables(db)
+
+    if args.create_db:
+        create_tables(db)
 
     app.set_current_location(position);
 
