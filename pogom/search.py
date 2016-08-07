@@ -181,6 +181,9 @@ def search_worker_thread(args, account, search_items_queue, parse_lock):
 
             # Create the API instance this will use
             api = PGoApi()
+            if args.encrypt_library:
+                log.info('using encrypt library: |%s|', args.encrypt_library)
+                api.activate_signature(args.encrypt_library)
 
             # The forever loop for the searches
             while True:
@@ -268,10 +271,11 @@ def map_request(api, position):
     try:
         cell_ids = util.get_cell_ids(position[0], position[1])
         timestamps = [0,] * len(cell_ids)
-        return api.get_map_objects(latitude=f2i(position[0]),
+        bob = api.get_map_objects(latitude=f2i(position[0]),
                             longitude=f2i(position[1]),
                             since_timestamp_ms=timestamps,
                             cell_id=cell_ids)
+        return bob
     except Exception as e:
         log.warning('Exception while downloading map: %s', e)
         return False
